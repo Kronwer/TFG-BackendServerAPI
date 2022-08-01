@@ -6,7 +6,7 @@ GET http://localhost:3000/coordinates/?startDate=2022-05-11 19:00:00&endDate=202
 
 ###
 
-GET http://localhost:3000/building
+GET http://localhost:3000/buildings
 
 ###
 
@@ -47,7 +47,7 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3000/building/2
+PUT http://localhost:3000/buildings/2
 Content-Type: application/json
 
 {

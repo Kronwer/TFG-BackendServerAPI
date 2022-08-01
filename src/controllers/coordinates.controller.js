@@ -10,8 +10,8 @@ var types = pg.types;
 const pool = new Pool({
     host: 'localhost',
     user: 'postgres',
-    password: 'zA32fpSfocAzPxut1wUW',
-    database: 'geodatabase',
+    password: 'admin',
+    database: 'tfg',
     port: '5432'
 });
 
@@ -23,21 +23,20 @@ const getCoordinates = async (req, res) => {
     console.log('Building Id = ' + building);
     console.log('Start Date = ' + startDate);
     console.log('End Date = ' + endDate);
-    const response = await pool.query('SELECT * FROM coordinates WHERE timedate >= $1 AND timedate < $2', [startDate, endDate]);
-    res.header("Access-Control-Allow-Origin", "*");
+    // const response = await pool.query('SELECT * FROM coordinate WHERE timestamp >= $1 AND timestamp < $2', [startDate, endDate]);
+    const response = await pool.query('SELECT * FROM coordinate');
     res.status(200).json(response.rows);
 }
 
 const getCoordinateById = async (req, res) => {
     const id = req.params.id;
-    const response = await pool.query('SELECT * FROM coordinates WHERE id = $1', [id]);
-    res.header("Access-Control-Allow-Origin", "*");
+    const response = await pool.query('SELECT * FROM coordinate WHERE id = $1', [id]);
     res.json(response.rows.at(0));
 }
 
 const createCoordinate = async (req, res) => {
     const { latitude, longitude } = req.body;
-    const response = await pool.query('INSERT INTO coordinates (latitude, longitude) VALUES ($1, $2)', [latitude, longitude]);
+    const response = await pool.query('INSERT INTO coordinate (latitude, longitude) VALUES ($1, $2)', [latitude, longitude]);
     res.json({
         message: 'Coordinate Added Succesfully',
         body: {
@@ -49,7 +48,7 @@ const createCoordinate = async (req, res) => {
 const updateCoordinate = async (req, res) => {
     const id = req.params.id;
     const { latitude, longitude } = req.body;
-    const response = await pool.query('UPDATE coordinates SET latitude = $1, longitude = $2 WHERE id = $3',[
+    const response = await pool.query('UPDATE coordinate SET latitude = $1, longitude = $2 WHERE id = $3',[
         latitude,
         longitude,
         id
@@ -59,7 +58,7 @@ const updateCoordinate = async (req, res) => {
 
 const deleteCoordinate = async (req, res) => {
     const id = req.params.id;
-    const response = await pool.query('DELETE FROM coordinates WHERE id = $1', [id]);
+    const response = await pool.query('DELETE FROM coordinate WHERE id = $1', [id]);
     console.log(response);
     res.json(`Coordinate ${id} deleted suceessfully`);
 }

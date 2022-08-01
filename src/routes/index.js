@@ -11,7 +11,7 @@ router.post('/coordinates', createCoordinate);
 router.put('/coordinates/:id', updateCoordinate);
 router.delete('/coordinates/:id', deleteCoordinate);
 
-router.get('/building', getBuildings);
-router.put('/building/:id', updateBuilding);
+router.get('/buildings', getBuildings);
+router.put('/buildings/:id', updateBuilding);
 
 module.exports = router;
