@@ -1,0 +1,57 @@
+GET http://localhost:3000/coordinates
+
+###
+
+GET http://localhost:3000/coordinates/?startDate=2022-05-11 19:00:00&endDate=2022-05-11 20:00:00
+
+###
+
+GET http://localhost:3000/building
+
+###
+
+GET http://localhost:3000/coordinates/3
+
+
+###
+
+POST http://localhost:3000/coordinates
+Content-Type: application/json
+
+{
+    "latitude": 51.48286654556909,
+    "longitude": -0.34600334201647776
+}
+
+###
+
+DELETE http://localhost:3000/coordinates/1
+
+###
+
+PATCH http://localhost:3000/geodata/623a087c735ec6102f225f27
+Content-Type: application/json
+
+{
+    "latitude": 3000
+}
+
+###
+
+PUT http://localhost:3000/coordinates/2
+Content-Type: application/json
+
+{
+    "latitude": 39.482778653331636,
+    "longitude": -0.3467806028455461
+}
+
+###
+PUT http://localhost:3000/building/2
+Content-Type: application/json
+
+{
+    "name": "ETSINF - EDIFICIO 1E",
+    "latitude": 39.482716712422764,
+    "longitude": -0.346685476430633
+}
