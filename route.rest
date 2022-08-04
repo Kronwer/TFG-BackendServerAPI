@@ -4,9 +4,7 @@ GET http://localhost:3000/coordinates
 
 GET http://localhost:3000/coordinates/?startDate=2022-05-11 19:00:00&endDate=2022-05-11 20:00:00
 
-###
 
-GET http://localhost:3000/buildings
 
 ###
 
@@ -47,6 +45,10 @@ Content-Type: application/json
 }
 
 ###
+
+GET http://localhost:3000/buildings
+
+###
 PUT http://localhost:3000/buildings/2
 Content-Type: application/json
 
@@ -55,3 +57,17 @@ Content-Type: application/json
     "latitude": 39.482716712422764,
     "longitude": -0.346685476430633
 }
+
+###
+POST http://localhost:3000/buildings
+Content-Type: application/json
+
+{
+    "name": "Test Building",
+    "floors": 1,
+    "latitude": 39.48067057885303,
+    "longitude": -0.3398773008264785
+}
+
+###
+DELETE http://localhost:3000/buildings/1

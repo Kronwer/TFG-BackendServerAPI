@@ -60,7 +60,7 @@ const deleteCoordinate = async (req, res) => {
     const id = req.params.id;
     const response = await pool.query('DELETE FROM coordinate WHERE id = $1', [id]);
     console.log(response);
-    res.json(`Coordinate ${id} deleted suceessfully`);
+    res.json(`Coordinate ${id} deleted successfully`);
 }
 
 module.exports = {
