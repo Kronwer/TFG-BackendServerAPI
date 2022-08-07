@@ -19,12 +19,7 @@ const getCoordinates = async (req, res) => {
     const building = req.query.building;
     const startDate = req.query.startDate;
     const endDate = req.query.endDate;
-    console.log('NEW QUERY');
-    console.log('Building Id = ' + building);
-    console.log('Start Date = ' + startDate);
-    console.log('End Date = ' + endDate);
-    // const response = await pool.query('SELECT * FROM coordinate WHERE timestamp >= $1 AND timestamp < $2', [startDate, endDate]);
-    const response = await pool.query('SELECT * FROM coordinate');
+    const response = await pool.query('SELECT * FROM coordinate WHERE timestamp >= $1 AND timestamp < $2', [startDate, endDate]);
     res.status(200).json(response.rows);
 }
 
@@ -35,12 +30,12 @@ const getCoordinateById = async (req, res) => {
 }
 
 const createCoordinate = async (req, res) => {
-    const { latitude, longitude } = req.body;
-    const response = await pool.query('INSERT INTO coordinate (latitude, longitude) VALUES ($1, $2)', [latitude, longitude]);
+    const { building, latitude, longitude, timestamp } = req.body;
+    const response = await pool.query('INSERT INTO coordinate (building, latitude, longitude, timestamp) VALUES ($1, $2, $3, $4)', [building, latitude, longitude, timestamp]);
     res.json({
         message: 'Coordinate Added Succesfully',
         body: {
-            coordinate: { latitude, longitude }
+            coordinate: { building, latitude, longitude, timestamp }
         }
     })
 }

@@ -17,8 +17,10 @@ POST http://localhost:3000/coordinates
 Content-Type: application/json
 
 {
-    "latitude": 51.48286654556909,
-    "longitude": -0.34600334201647776
+    "building": 1,
+    "latitude": 39.482445876265366,
+    "longitude": -0.3464556142106639,
+    "timestamp": "2022-09-15 12:00:00"
 }
 
 ###
