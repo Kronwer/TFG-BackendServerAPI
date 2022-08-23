@@ -1,0 +1,78 @@
+// CREATE COORDINATES
+
+// Empty body
+POST http://localhost:3000/coordinates
+
+###
+
+// Wrong types for parameters
+POST http://localhost:3000/coordinates
+Content-Type: application/json
+
+{
+    "building": "Hello",
+    "latitude": "39.482445876265366",
+    "longitude": "-0.3464556142106639",
+    "timestamp": 9382384,
+    "floorNumber": "Bye"
+}
+
+###
+
+// Building that doesn't exist
+POST http://localhost:3000/coordinates
+Content-Type: application/json
+
+{
+    "building": 40,
+    "latitude": 39.482445876265366,
+    "longitude": -0.3464556142106639,
+    "timestamp": "2022-09-15 12:00:00",
+    "floorNumber": 1
+}
+
+###
+
+// Wrong Building floor
+POST http://localhost:3000/coordinates
+Content-Type: application/json
+
+{
+    "building": 40,
+    "latitude": 39.482445876265366,
+    "longitude": -0.3464556142106639,
+    "timestamp": "2022-09-15 12:00:00",
+    "floorNumber": 1
+}
+
+###
+
+// Wrong range of values for latitude [-90, 90] and longitude [-180, 180]
+POST http://localhost:3000/coordinates
+Content-Type: application/json
+
+{
+    "building": 4,
+    "latitude": -100,
+    "longitude": 200,
+    "timestamp": "2022-09-15 12:00:00",
+    "floorNumber": 1
+}
+
+###
+
+// Wrong date format (yyyy-mm-dd)
+POST http://localhost:3000/coordinates
+Content-Type: application/json
+
+{
+    "building": 2,
+    "latitude": 39.482445876265366,
+    "longitude": -0.3464556142106639,
+    "timestamp": "15-09-2022 12:00:00",
+    "floorNumber": 1
+}
+
+###
+
+// GET COORDINATES
