@@ -1,4 +1,5 @@
 const { Pool } = require('pg');
+require('dotenv').config();
 
 // Avoid timedate getting converted to Date
 const pg = require('pg');
