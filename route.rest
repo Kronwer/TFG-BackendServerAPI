@@ -1,4 +1,4 @@
-GET http://localhost:3000/coordinates/?building=1&startDate=2022-09-11 19:00:00&endDate=2022-09-19 20:00:00
+GET http://localhost:3000/coordinates/?building=1&startDate=2020-01-01 19:00:00&endDate=2022-12-30 20:00:00
 
 ###
 
@@ -7,10 +7,10 @@ Content-Type: application/json
 
 {
     "building": 1,
-    "latitude": 39.482445876265366,
-    "longitude": -0.3464556142106639,
-    "timestamp": "2022-09-15 12:00:00",
-    "floorNumber": 1
+    "floornumber": 2,
+    "latitude": 39.482926395770775,
+    "longitude": -0.3468272121410691,
+    "timestamp": "2022-07-12 12:00:00"
 }
 
 ###
@@ -30,11 +30,12 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/buildings/2
+PUT http://localhost:3000/buildings/7
 Content-Type: application/json
 
 {
-    "name": "ETSINF - EDIFICIO 1E",
+    "name": "Test Building",
+    "floors": 3,
     "latitude": 39.482716712422764,
     "longitude": -0.346685476430633
 }

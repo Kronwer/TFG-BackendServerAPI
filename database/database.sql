@@ -14,9 +14,6 @@ CREATE TABLE building(
     longitude float
 );
 
-DROP TABLE coordinates
-DROP TABLE building
-
 INSERT INTO coordinates (id, building, latitude, longitude, timedate, floorNumber) VALUES
     (1, 1, 39.482926395770775, -0.3468272121410691,'2022-09-12 12:00:00', 1),
     (2, 1, 39.482910393698766, -0.34673869791851814,'2022-09-12 12:00:00', 1),
@@ -43,6 +40,9 @@ INSERT INTO coordinates (id, building, latitude, longitude, timedate, floorNumbe
 INSERT INTO building (name, latitude, longitude) VALUES
     ('ETSINF - EDIFICIO 1G', 39.482716712422764, -0.346685476430633),
     ('ETSINF - EDIFICIO 1E', 39.482677632750196, -0.34830574416596655);
+
+DROP TABLE coordinates
+DROP TABLE building
 
 SELECT timedate
 FROM coordinates

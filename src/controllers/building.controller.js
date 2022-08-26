@@ -1,49 +1,57 @@
-const { Pool } = require('pg');
-require('dotenv').config();
-
-const pool = new Pool({
-    host: process.env.BD_HOST,
-    user: process.env.BD_USER,
-    password: process.env.BD_PASSWORD,
-    database: process.env.BD_DATABASE,
-    port: process.env.BD_PORT
-});
+const { getAllBuildingsDB, createNewBuildingDB, updateBuildingDB, deleteBuildingDB } = require('../repository/building.repository');
+const { deleteCoordinatesFromBuildingBD } = require('../repository/coordinate.repository');
 
 const getBuildings = async (req, res) => {
-    const response = await pool.query('SELECT * FROM building ORDER BY id ASC');
-    res.status(200).json(response.rows);
+    try {
+        const response = await getAllBuildingsDB();
+        res.status(200).json(response);
+    } catch(err) {
+        res.status(500).send('An error has occurred');
+    }
 }
 
 const createBuilding = async (req, res) => {
     const { name, floors, latitude, longitude } = req.body;
-    await pool.query('INSERT INTO building (name, floors, latitude, longitude) VALUES ($1, $2, $3, $4)', [name, floors, latitude, longitude]);
-    res.status(200).json({
-        message: 'Building Added Suuccesfully',
-        body: {
-            building: { name, floors, latitude, longitude }
-        }
-    });
+    try {
+        await createNewBuildingDB(name, floors, latitude, longitude);
+        res.status(200).json({
+            message: 'Building added succesfully',
+            building: {
+                name, floors, latitude, longitude
+            }
+        });
+    } catch(err) {
+        res.status(500).send('An error has occurred');
+    }
 }
 
 const updateBuilding = async(req, res) => {
-    console.log('Received updateBuilding request');
     const id = req.params.id;
     const { name, floors, latitude, longitude } = req.body;
-    const response = await pool.query('UPDATE building SET name = $1, floors = $2, latitude = $3, longitude = $4 WHERE id = $5',[
-        name,
-        floors,
-        latitude,
-        longitude,
-        id
-    ]);
-    res.status(200).send('Building updated successfully');
+    try {
+        await updateBuildingDB(id, name, floors, latitude, longitude);
+        res.status(200).json({
+            message: 'Building updated successfully',
+            building: {
+                name, floors, latitude, longitude
+            }
+        });
+    } catch(err) {
+        res.status(500).send('An error has occurred')
+    }
+    
 }
 
 const deleteBuilding = async (req, res) => {
     const id = req.params.id;
-    await pool.query('DELETE FROM coordinate WHERE building = $1', [id]);
-    await pool.query('DELETE FROM building WHERE id = $1', [id]);
-    res.json(`Building ${id} deleted successfully`);
+    try {
+        await deleteCoordinatesFromBuildingBD(id);
+        await deleteBuildingDB(id);
+        res.status(200).send('Building deleted successfully');
+    } catch(err) {
+        res.status(500).send('An error has occurred');
+    }
+    
 }
 
 module.exports = {
