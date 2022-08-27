@@ -1,11 +1,17 @@
 const { getCoordinatesDB, createNewCoordinateDB } = require('../repository/coordinate.repository');
 
 const getCoordinates = async (req, res) => {
-    const building = req.query.building;
-    const startDate = req.query.startDate;
-    const endDate = req.query.endDate;
-    const response = await getCoordinatesDB(building, startDate, endDate);
-    res.status(200).json(response);
+    const { building, startDate, endDate } = req.query;
+    if (!building || !startDate || !endDate) {
+        res.status(500).send('An error has occurred');
+        return;
+    }
+    try {
+        const response = await getCoordinatesDB(building, startDate, endDate);
+        res.status(200).json(response);
+    } catch(err) {
+        res.status(500).send('An error has occurred');
+    }
 }
 
 const createCoordinate = async (req, res) => {
@@ -15,8 +21,8 @@ const createCoordinate = async (req, res) => {
             await createNewCoordinateDB(building, floornumber, latitude, longitude, timestamp);
             res.json({
                 message: 'Coordinate added succesfully',
-                body: {
-                    coordinate: { building, latitude, longitude, timestamp, floornumber }
+                coordinate: {
+                    building, latitude, longitude, timestamp, floornumber
             }
         })
         } catch(err) {

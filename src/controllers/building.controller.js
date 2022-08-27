@@ -37,7 +37,7 @@ const updateBuilding = async(req, res) => {
             }
         });
     } catch(err) {
-        res.status(500).send('An error has occurred')
+        res.status(500).send('An error has occurred');
     }
     
 }
