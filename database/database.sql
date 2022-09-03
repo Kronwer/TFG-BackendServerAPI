@@ -2,6 +2,8 @@ CREATE DATABASE geodatabase;
 
 CREATE TABLE coordinates(
     id SERIAL PRIMARY KEY,
+    building integer,
+    floornumber integer,
     latitude float,
     longitude float,
     timedate TIMESTAMP
@@ -10,11 +12,12 @@ CREATE TABLE coordinates(
 CREATE TABLE building(
     id SERIAL PRIMARY KEY,
     name TEXT,
+    floors integer,
     latitude float,
     longitude float
 );
 
-INSERT INTO coordinates (id, building, latitude, longitude, timedate, floorNumber) VALUES
+INSERT INTO coordinates (id, building, latitude, longitude, timedate, floornumber) VALUES
     (1, 1, 39.482926395770775, -0.3468272121410691,'2022-09-12 12:00:00', 1),
     (2, 1, 39.482910393698766, -0.34673869791851814,'2022-09-12 12:00:00', 1),
     (3, 1, 39.482869157573184, -0.346571238578557,'2022-09-12 12:00:00', 1),

@@ -15,14 +15,14 @@ beforeAll(async () => {
 
 describe("GET /buildings", () => {
 
-    // Check correct functionality
-
     // HTTP Request
     let response;
 
     beforeAll(async () => {
         response = await request(app).get("/buildings");
     });
+
+    // Check correct functionality
 
     it("returns 200", async () => {
         expect(response.statusCode).toBe(200);
